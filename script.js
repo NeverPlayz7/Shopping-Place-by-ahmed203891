@@ -1,52 +1,54 @@
-let total = 0;
-
-function addToCart(product, price) {
-  document.getElementById("clickSound").play();
-
-  const list = document.getElementById("cart-list");
-  const item = document.createElement("li");
-  item.textContent = product + " - Rs " + price;
-  list.appendChild(item);
-
-  total += price;
-  document.getElementById("total").innerText = total;
-}
-
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-for (let i = 0; i < 80; i++) {
-  particles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    r: Math.random() * 2 + 1,
-    dx: Math.random() - 0.5,
-    dy: Math.random() - 0.5
-  });
-}
-
-function animateParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  particles.forEach(p => {
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(0,255,180,0.7)";
-    ctx.fill();
-
-    p.x += p.dx;
-    p.y += p.dy;
-
-    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-  });
-
-  requestAnimationFrame(animateParticles);
-}
-
-animateParticles();
+particlesJS("particles-js", {
+    "particles": {
+        "number": {
+            "value": 80,
+            "density": {
+                "enable": true,
+                "value_area": 800
+            }
+        },
+        "color": { "value": ["#ff4081","#18ffff","#ffea00"] },
+        "shape": {
+            "type": "circle",
+            "stroke": { "width": 0, "color": "#000000" },
+            "polygon": { "nb_sides": 5 }
+        },
+        "opacity": {
+            "value": 0.7,
+            "random": true,
+            "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false }
+        },
+        "size": {
+            "value": 4,
+            "random": true,
+            "anim": { "enable": true, "speed": 3, "size_min": 0.1, "sync": false }
+        },
+        "line_linked": { "enable": true, "distance": 150, "color": "#ff4081", "opacity": 0.4, "width": 1 },
+        "move": {
+            "enable": true,
+            "speed": 2,
+            "direction": "none",
+            "random": true,
+            "straight": false,
+            "out_mode": "out",
+            "bounce": false,
+            "attract": { "enable": false, "rotateX": 600, "rotateY": 1200 }
+        }
+    },
+    "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+            "onhover": { "enable": true, "mode": "repulse" },
+            "onclick": { "enable": true, "mode": "push" },
+            "resize": true
+        },
+        "modes": {
+            "grab": { "distance": 400, "line_linked": { "opacity": 1 } },
+            "bubble": { "distance": 400, "size": 40, "duration": 2, "opacity": 8, "speed": 3 },
+            "repulse": { "distance": 100 },
+            "push": { "particles_nb": 4 },
+            "remove": { "particles_nb": 2 }
+        }
+    },
+    "retina_detect": true
+});
