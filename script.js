@@ -1,6 +1,8 @@
 let total = 0;
 
 function addToCart(product, price) {
+  document.getElementById("clickSound").play();
+
   const list = document.getElementById("cart-list");
   const item = document.createElement("li");
   item.textContent = product + " - Rs " + price;
@@ -9,6 +11,7 @@ function addToCart(product, price) {
   total += price;
   document.getElementById("total").innerText = total;
 }
+
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 
